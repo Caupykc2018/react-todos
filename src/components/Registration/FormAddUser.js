@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import styles from "../../styles/registration.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {registrationWithAuth} from "../../actions";
-import {Redirect} from "react-router-dom";
 
 export const FormAddUser = () => {
   const [valueLogin, setValueLogin] = useState("");
@@ -29,7 +28,7 @@ export const FormAddUser = () => {
     try {
       users.forEach(user => {
         if(user.login === valueLogin) {
-          throw {};
+          throw new Error("Login error");
         }
       });
     }
