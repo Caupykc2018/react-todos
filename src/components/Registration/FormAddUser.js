@@ -54,14 +54,14 @@ export const FormAddUser = () => {
       />
       <input
         className={styles.input}
-        type="text"
+        type="password"
         placeholder="Password"
         value={valuePassword}
         onChange={(e) => setValuePassword(e.target.value)}
       />
       <input
         className={styles.input}
-        type="text"
+        type="password"
         placeholder="Repeat password"
         value={valueRepeatPassword}
         onChange={(e) => setValueRepeatPassword(e.target.value)}

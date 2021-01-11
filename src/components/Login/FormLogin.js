@@ -48,7 +48,7 @@ export const FormLogin = () => {
       />
       <input
         className={styles.input}
-        type="text"
+        type="password"
         placeholder="Password"
         value={valuePassword}
         onChange={(e) => setValuePassword(e.target.value)}
