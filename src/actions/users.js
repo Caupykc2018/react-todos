@@ -1,4 +1,4 @@
-import {initialTab} from "./tabs";
+import {initialTab} from "./currentTab";
 import {initialTodo} from "./todos";
 
 export const registration = (id, login, password) => ({

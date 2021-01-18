@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState} from "react";
 import styles from "../../styles/todos.module.css";
 import {useDispatch} from "react-redux";
 import {removeUserTodo, toggleUserTodo} from "../../actions";
