@@ -1,13 +1,15 @@
-const currentTab = (state = {}, {type, payload}) => {
+import { SET_TAB } from '../constants';
+
+const currentTab = (state = {}, { type, payload }) => {
   switch (type) {
-    case "SET_TAB":
+    case SET_TAB:
       return {
         ...state,
-        [this.store.currentUser.login]: payload.tab
+        [payload.login]: payload.tab,
       };
     default:
       return state;
   }
-}
+};
 
 export default currentTab;

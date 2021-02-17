@@ -1,59 +1,76 @@
-import React, {useState} from "react";
-import styles from "../../styles/login.module.css";
-import {useDispatch, useSelector} from "react-redux";
-import {logIn} from "../../actions";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Button, makeStyles, TextField } from '@material-ui/core';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { login } from '../../actions';
+
+const useStyles = makeStyles({
+  input: {
+    marginBottom: 10,
+    width: '100%',
+  },
+  submit: {
+    marginBottom: 5,
+  },
+});
+
+const schemaValidation = Yup.object().shape({
+  login: Yup.string().required('Required!'),
+  password: Yup.string().required('Required!'),
+});
 
 export const FormLogin = () => {
-  const [valueLogin, setValueLogin] = useState("");
-  const [valuePassword, setValuePassword] = useState("");
-
-  const users = useSelector(state => state.users);
+  const classes = useStyles();
 
   const dispatch = useDispatch();
 
-  const handlerSubmit = () => {
-    if(!valueLogin) {
-      return alert("Login field is empty");
-    }
-
-    if(!valuePassword) {
-      return alert("Password field is empty");
-    }
-
-    let currentUser;
-
-    users.forEach(user => {
-      if(user.login === valueLogin) {
-        if(user.password === valuePassword) {
-          currentUser = user;
-        }
-      }
-    });
-
-    if(!currentUser) {
-      return alert("Incorrect login or password");
-    }
-
-    dispatch(logIn(currentUser));
-  }
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+    initialValues: {
+      login: '',
+      password: '',
+    },
+    validationSchema: schemaValidation,
+    onSubmit: (values) => dispatch(login(values.login, values.password)),
+  });
 
   return (
     <>
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Login"
-        value={valueLogin}
-        onChange={(e) => setValueLogin(e.target.value)}
+      <TextField
+        name="login"
+        classes={{
+          root: classes.input,
+        }}
+        value={values.login}
+        label="login"
+        variant="outlined"
+        onChange={handleChange}
+        error={touched.login && Boolean(errors.login)}
+        helperText={touched.login && errors.login}
       />
-      <input
-        className={styles.input}
+      <TextField
+        name="password"
+        classes={{
+          root: classes.input,
+        }}
         type="password"
-        placeholder="Password"
-        value={valuePassword}
-        onChange={(e) => setValuePassword(e.target.value)}
+        value={values.password}
+        label="password"
+        variant="outlined"
+        onChange={handleChange}
+        error={touched.password && Boolean(errors.password)}
+        helperText={touched.password && errors.password}
       />
-      <button className={styles.submit} onClick={handlerSubmit}>Submit</button>
+      <Button
+        classes={{
+          root: classes.submit,
+        }}
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+      >
+        Submit
+      </Button>
     </>
-  )
-}
+  );
+};
