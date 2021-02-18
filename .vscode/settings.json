@@ -3,5 +3,6 @@
     "eslint.format.enable": true,
     "eslint.lintTask.enable": true,
     "eslint.onIgnoredFiles": "warn",
-    "eslint.run": "onSave"
+    "eslint.run": "onSave",
+    "eslint.trace.server": null
 }
