@@ -5,12 +5,12 @@ import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-import configureStore from './store';
+import { store } from './store';
 import { TitleState } from './context/title/TitleState';
 import { SelectedUsersState } from './context/selectedUsers/SelectedUsersState';
 
 ReactDOM.render(
-  <Provider store={configureStore()}>
+  <Provider store={store}>
     <TitleState>
       <SelectedUsersState>
         <App />

@@ -5,5 +5,5 @@ export const useDebounce = (fn, ms, deps) => {
     const idTimeout = setTimeout(fn, ms);
 
     return () => clearTimeout(idTimeout);
-  }, [fn, ms, deps]);
+  }, [...deps]);
 };
